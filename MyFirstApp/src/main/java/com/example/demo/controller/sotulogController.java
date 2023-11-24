@@ -96,6 +96,14 @@ public class sotulogController {
 		redirectAttributes.addFlashAttribute("ttt", ttt);
 		return "sotuhome";
 	}
+	//個人ログ
+	@RequestMapping(path = "/kojinLog", method = RequestMethod.POST)
+	public String fail() throws IOException {
+
+		
+		return "kojinLog";
+	}
+	
 
 	//NG画面
 	@RequestMapping(path = "/sotung", method = RequestMethod.GET)
@@ -103,11 +111,13 @@ public class sotulogController {
 		return "sotung";
 	}
 
+	//クラス選択画面
 	@RequestMapping(path = "/kurasu", method = RequestMethod.GET)
 	public String kurasu() {
 		return "kurasu";
 	}
 	
+	//管理者ログイン
 	@RequestMapping(path = "/kanrilog", method = RequestMethod.GET)
 	public String kanrilog() {
 		return "kanrilog";
