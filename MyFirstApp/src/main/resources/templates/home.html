@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="/js/home.js"></script>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body bgcolor=""text="">
+	<h3>ホーム画面</h3>
+	<p>ログインが完了しました</p>
+	ID:<p th:text="${id}"></p>です
+	
+	PW：<p th:text="${pw}"></p>です
+	
+	<h3>ファイルアップロード</h3>
+<form th:action="@{/home}" method="POST" enctype="multipart/form-data">
+<input type="file" name="myfile"><br>
+<input type="file" name="newfile"><br>
+<input type="submit">
+</form>
+<hr>
+<br>
+<h3>あなたがアップロードした画像</h3>
+<img th:src="${'data:image/png;base64,' + encodedImage}">
+
+<h3>あなたがアップロードした動画</h3>
+<video style="width:800px;" autoplay controls><source th:src="${'data:image/mp4;base64,' + encodedImage2}" type="video/mp4"></video>
+
+<form th:action="@{/home}" method="POST" enctype="multipart/form-data">
+<p>入力欄：<input type="text" name="ttt"><br></p>
+		
+   ツイート:<p th:text="${ttt}"></p>
+   <input type="submit"></p>
+		</form>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<body>
+	<h2>drinkを登録する！</h2>
+	<form th:action="@{/mythirteendrinks}" method="POST" enctype="multipart/form-data">
+
+		飲み物ID(数値)：<input type="number" name="drink_id"> <br>
+		飲み物のタイトル：<input type="text" name="drink_name"> <br>
+		値段(数値)：<input type="number" name="drink_price"> <br>
+		<input type="submit">
+	</form>
+	
+
+	DBの内容:<br>
+	<th:block th:each="drink : ${drinkslist}">
+		<p th:text="${drink.drink_id}"></p>
+		<p th:text="${drink.drink_name}"></p>
+		<p th:text="${drink.drink_price}"></p>
+	</th:block>	
+</body>
+</html>

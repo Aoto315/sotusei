@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+	<meta charset='utf-8' />
+	<title>カレンダー画面</title>
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+	<script src='fullcalendar/dist/index.global.js'></script>
+	<script>
+
+		document.addEventListener('DOMContentLoaded', function () {
+			var calendarEl = document.getElementById('calendar');
+			var calendar = new FullCalendar.Calendar(calendarEl, {
+				initialView: 'dayGridMonth'
+			});
+
+			var calendar = new FullCalendar.Calendar(calendarEl, {
+				initialView: 'dayGridMonth',
+				selectable: true,
+
+				select: function (info) {
+					var startDate = info.startStr;
+					var endDate = info.endStr;
+					
+					alert('選択された日付: ' + startDate);
+					
+					// 選択された日付をURLのパラメータとしてエンコード
+                    var url = 'http://localhost:8080/yoyaku?selectedDate=' + encodeURIComponent(startDate);
+
+                    // 選択された日付をパラメータとして含むURLにリダイレクト
+                    window.location.href = 'http://localhost:8080/yoyaku';
+
+				}
+			});
+
+			calendar.render();
+		});
+
+	</script>
+</head>
+
+<body>
+	<div id='calendar'></div>
+	<script type="text/javascript" src="home.js"></script>
+</body>
+
+</html>

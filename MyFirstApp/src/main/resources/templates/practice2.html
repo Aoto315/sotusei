@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/practice2}" method="POST">
+	
+	<p>ID：
+		<input type="text" name="ID"><br>
+PassWord：
+		<input type="text" name="PW">
+		<input type="submit"></p>
+		
+		ID:<p th:text="${ID}"></p>です
+	
+	PW：<p th:text="${PW}"></p>です
+
+</body>
+</html>

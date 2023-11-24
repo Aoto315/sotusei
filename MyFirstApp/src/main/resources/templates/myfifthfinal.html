@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/myfifthfinal.css"/>
+	<script src="/js/myfifthfinal.js"></script>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<form th:action="@{/fifthfinal}" method="POST">
+		<h3>単一Stringで受ける入力欄の例</h3>
+		
+		あなたの好きな食べ物:<br>
+		<input name="sushi" type="checkbox" value="マグロ"> マグロ<br>
+		<input name="sushi" type="checkbox" value="イカ">イカ<br>
+		<input name="sushi" type="checkbox" value="タマゴ"> タマゴ<br>
+
+
+
+		<input type="submit">
+	</form>
+	<hr>
+	↓入力した内容↓
+	
+
+	好きな寿司:<br>
+	<th:block th:each="sushi : ${sushilist}">
+		<p th:text="${sushi}"></p>
+	</th:block>
+
+</body>
+
+</html>

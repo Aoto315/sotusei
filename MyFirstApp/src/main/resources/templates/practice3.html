@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form th:action="@{/practice3}" method="POST">
+	曜日：<br>
+		<input name="youbi" type="checkbox" value="月曜日">月曜日<br>
+		<input name="youbi" type="checkbox" value="火曜日">火曜日<br>
+		<input name="youbi" type="checkbox" value="水曜日">水曜日<br>
+		<input name="youbi" type="checkbox" value="木曜日">木曜日<br>
+		<input name="youbi" type="checkbox" value="金曜日">金曜日<br>
+		<input type="submit">
+		</form>
+	<hr>
+	↓入力した内容↓
+	曜日:<br>
+	<th:block th:each="youbi : ${youbilist}">
+		<p th:text="${youbi}"></p>
+	</th:block>
+</body>
+</html>

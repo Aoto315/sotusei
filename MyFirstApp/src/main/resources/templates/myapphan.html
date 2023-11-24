@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<title>MyApp</title>
+	<link rel="stylesheet" type="text/css" href="/css/myapp.css" />
+</head>
+
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<p>
+		<input type="text" placeholder="ルームIDを入力してね。" id="text1" maxlength="5" />
+		<input type="button" value="接続" onclick="clickBtn1()">
+		<input type="button" value="切断" onclick="clickBtn99()">
+		<hr>
+		<input type="text" placeholder="名前を入力" id="playername">
+		<input type="button" value="反応する！！"onclick="clickBtn2()">
+		<input type="button" value="仕掛ける！！！" onclick="clickBtn3()">
+		<input type="button" value="リセットする" onclick="clickBtn98()">
+	</p>
+	<hr>
+	<div id="messages">
+		反射王<br>
+		<p style="font-size: 150px;" id="disp">●</p>
+	</div>
+	<script>
+		//接続ボタンを推したときの処理。
+		//(今は分からなくてOK) SpringのmeesageBrokerを叩く。
+		let stompClient = null;
+		function clickBtn1() {
+			const socket = new SockJS('/point1');
+			stompClient = Stomp.over(socket);
+			stompClient.connect({}, function (frame) {
+	
+				/////////////「反応」コールバック関数(Springからのリターンを受け取る所)////////
+				stompClient.subscribe('/topic/hannou', function (result) {
+					const newTag = document.createElement("p");
+					
+					//メッセージをpタグ(newTag)に追加
+					newTag.textContent = result.body;
+					
+					//画面の丸を黒くさせる。
+					document.getElementById("disp").innerHTML ="●"
+					
+					//メッセージを青くする。
+					newTag.style.color = "blue";
+					
+					//divタグ内に作ったpタグを突っ込む。
+					document.getElementById("messages").appendChild(newTag);
+					console.log(result.body);
+				});
+				////////////////////////////////////////////////////////////////////////
+				
+				
+				/////////////「仕掛け」コールバック関数(Springからのリターンを受け取る所)////////
+				stompClient.subscribe('/topic/sikake', function (result) {
+					const newTag = document.createElement("p");
+					
+					//メッセージをpタグ(newTag)に追加
+					newTag.textContent = result.body;
+					
+					//メッセージを赤くする。
+					newTag.style.color = "red";
+					
+					//画面の●を白くさせる。
+					document.getElementById("disp").innerHTML ="〇"
+					
+					//divタグ内に作ったpタグを突っ込む。
+					document.getElementById("messages").appendChild(newTag);
+					console.log(result.body);
+				});
+				////////////////////////////////////////////////////////////////////////
+				
+			});
+		}
+		
+		/////////ボタンに反応した場合///////////
+		function clickBtn2() {
+			//画面からプレイヤーネーム取得
+			const pname = document.getElementById("playername").value;
+			//Controllerに送信
+			stompClient.send('/app/hannou', {}, pname);
+		}
+		/////////////////////////////////////////////////////
+		
+		
+		/////////仕掛ける///////
+		function clickBtn3() {
+			//画面からプレイヤーネーム取得
+			const pname = document.getElementById("playername").value;
+			//Controllerに送信
+			stompClient.send('/app/sikake', {}, pname);
+		}
+		/////////////////////////////////////////////////////
+		
+		////////「リセットする」ボタンを推したときの処理/////////////
+		//function clickBtn98() {
+		//	//画面の●を白くさせる。
+		//	document.getElementById("??????").innerHTML ="●"
+		//}
+		/////////////////////////////////////////////////////
+		
+		////////「切断」ボタンを推したときの処理/////////////
+		function clickBtn99() {
+			if (stompClient !== null) {
+				stompClient.disconnect();
+				stompClient = null;
+			}
+			console.log("Disconnected");
+		}
+		/////////////////////////////////////////////////////
+	</script>
+</body>
+</html>

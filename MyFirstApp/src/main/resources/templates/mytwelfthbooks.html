@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<body>
+
+	DBの内容:<br>
+	<th:block th:each="book : ${bookslist}">
+		<p th:text="${book.book_id}"></p>
+		<p th:text="${book.book_name}"></p>
+		<p th:text="${book.book_page}"></p>
+		<p th:text="${book.author}"></p>
+	</th:block>	
+</body>
+</html>

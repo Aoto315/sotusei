@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<body>
+
+<body>
+	<h2>bookを登録する！</h2>
+	<form th:action="@{/mythirteen}" method="POST" enctype="multipart/form-data">
+
+		ブックID(数値)：<input type="number" name="book_id"> <br>
+		本のタイトル：<input type="text" name="book_name"> <br>
+		ページ数(数値)：<input type="number" name="book_page"> <br>
+		著者名：<input type="text" name="author"> <br>
+		<input type="submit">
+	</form>
+	
+
+	DBの内容:<br>
+	<th:block th:each="book : ${bookslist}">
+		<p th:text="${book.book_id}"></p>
+		<p th:text="${book.book_name}"></p>
+		<p th:text="${book.book_page}"></p>
+		<p th:text="${book.author}"></p>
+	</th:block>	
+</body>
+</html>
