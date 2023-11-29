@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+body {
+	background-color: #d3d3d3;
+	text-align: center;
+}
+
+h1 {
+	font-size: 60px;
+}
+
+a {
+	margin-bottom: 10px;
+	margin-left: 10px;
+	/* 下に10pxのマージンを追加 */
+}

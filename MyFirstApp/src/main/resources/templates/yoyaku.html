@@ -1,48 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/yoyaku.css}">
-     <iframe src="sidemenu.html" ></iframe>
-    <title>予約詳細画面</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="/js/sidemenu.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" href="/css/yoyaku.css">
+
+	<title>予約詳細画面</title>
 </head>
-<header>
-  <h1><a href="/">logo</a></h1>
-  <nav>
-    <ul>
-      <li><a class="js-header-nav-link" href="/sotuhome">カレンダー</a></li>
-      <li><a class="js-header-nav-link" href="/log">ログ</a></li>
-      <li><a class="js-header-nav-link" href="/logout">ログアウト</a></li>
-    </ul>
-  </nav>
-</header>
+
+
 <body>
-	<div>
-        <p>学籍番号: <span th:text="${id}"></span></p>
-        <h id="hiduke"><div th:text = "${startDate}"></div></h>
-        <p>日付: <span th:text="${startDate}"></span> です。</p>
-		<h3>予約情報を入力してください</h3>
-		
-		<form th:action="@{/yoyaku}" method="POST">
-			
-			<label for="pcNum">PC番号:</label>
-			<input type="text" name="pcNum"><br><br>
-			
-			<label for="henkyaku">返却予定日:</label>
-			<input type="date" name="henkyaku"><br><br>
-			
-			<label for="used">使用用途:</label>
-			<input type="text" name="used"><br><br><br>
-			
-			<button type="submit">決定</button>
-			
-			日付<p th:text="${startDate}">です。
-		</form>
-		
-		
-    </div>
-    
+	<div id="menu_wrap">
+		<div id="sidemenu">
+			<!--slidemenuの中身は自由-->
+			<ul>
+				<li><a href="http://localhost:8080/sotuhome">home</a></li>
+				<li><a href="http://localhost:8080/log">log</a></li>
+				<li><a href="#">menu</a></li>
+				<li><a href="#">menu</a></li>
+				<li><a href="#">menu</a></li>
+			</ul>
+
+		</div>
+		<!--//sidemenu-->
+		<div id="sidemenu_key">→</div>
+		<div class="clear"></div>
+	</div>
+	<!--//side_wrap-->
+
+	<p>学籍番号: <span th:text="${id}"></span></p>
+	<h id="hiduke">
+		<div th:text="${startDate}"></div>
+	</h>
+	<p>日付: <span th:text="${startDate}"></span> です。</p>
+	<h3>予約情報を入力してください</h3>
+
+
+	<label for="pcNum">PC番号:</label>
+	<input type="text" name="pcNum"><br><br>
+
+	<label for="henkyaku">返却予定日:</label>
+	<input type="date" name="henkyaku"><br><br>
+
+	<label for="used">使用用途:</label>
+	<input type="text" name="used"><br><br><br>
+
+	<button onclick="moveToNextPage()">決定</button>
+
+	<script>
+		function moveToNextPage() {
+			window.location.href = "yoyakuok";
+		}
+	</script>
+
+	</form>
+
+	</div>
+
+
+
 </body>
+
 </html>
